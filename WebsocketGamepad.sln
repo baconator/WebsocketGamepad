@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22129.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsocketGamepad", "WebsocketGamepad\WebsocketGamepad.csproj", "{672BF72E-D254-47ED-A83A-6C3C1496EA85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{672BF72E-D254-47ED-A83A-6C3C1496EA85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{672BF72E-D254-47ED-A83A-6C3C1496EA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{672BF72E-D254-47ED-A83A-6C3C1496EA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{672BF72E-D254-47ED-A83A-6C3C1496EA85}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
