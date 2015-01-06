@@ -1,0 +1,95 @@
+/* line 1, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+* {
+  margin: 0px;
+  padding: 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+/* line 12, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+.square-hack {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0; }
+
+/* line 20, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+div.gamepad {
+  width: 100%;
+  height: 100%;
+  /* Analog stick */ }
+  /* line 26, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-buttons-4 {
+    display: block;
+    /*position: relative;*/
+    position: absolute;
+    width: 5.25cm;
+    max-width: 60%;
+    /*top: calc(70% - 5.25cm / 2);
+        left: calc(50% - 5.25cm / 4);*/
+    bottom: calc(5.25cm / 4);
+    left: calc(50% - 5.25cm / 2); }
+  /* line 38, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-buttons-4::before {
+    content: "";
+    display: block;
+    padding-top: 100%; }
+  /* line 44, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-buttons-4 .gamepad-button:nth-child(1) {
+    margin-left: calc(100%/3);
+    margin-right: calc(100%/3); }
+  /* line 49, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-buttons-4 .gamepad-button:nth-child(3) {
+    margin-left: calc(100%/3); }
+  /* line 53, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-buttons-4 .gamepad-button:nth-child(4) {
+    margin-left: calc(100%/3); }
+  /* line 57, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-group > * {
+    width: 50%;
+    display: inline-block; }
+  /* line 62, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-button {
+    background-color: purple;
+    width: calc(100%/3);
+    height: calc(100%/3);
+    display: inline-block;
+    border-radius: 50% 50% 50% 50%;
+    /*display: inline-block;
+        width: calc(100%/3);
+        height: calc(100%/3);*/ }
+  /* line 75, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-stick {
+    background-color: green;
+    display: block;
+    border-radius: 50% 50% 50% 50%;
+    border: solid 0.1cm pink;
+    width: 40%;
+    height: 40%;
+    position: absolute;
+    visibility: hidden; }
+  /* line 86, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-touch-area {
+    display: inline-block;
+    width: 100%;
+    height: 50%; }
+  /* line 92, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-analog {
+    background-color: grey;
+    width: 3cm;
+    border-radius: 50% 50% 50% 50%;
+    border: solid 0.1cm black;
+    display: block;
+    position: relative;
+    visibility: hidden; }
+  /* line 102, C:/Users/Bacon/Documents/Visual Studio 14/Projects/WebsocketGamepad/WebClient/res/styles/gamepad.scss */
+  div.gamepad .gamepad-analog::before {
+    content: "";
+    display: block;
+    padding-top: 100%; }
+
+/*# sourceMappingURL=gamepad.css.map */

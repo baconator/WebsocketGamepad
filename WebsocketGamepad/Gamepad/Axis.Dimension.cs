@@ -46,6 +46,7 @@ namespace VJoyWrapper
                 joystick.GetVJDAxisMin(axis.Gamepad.Id, dim, ref Min);
                 joystick.GetVJDAxisMax(axis.Gamepad.Id, dim, ref Max);
                 Usage = dim;
+                Axis = axis;
             }
         }
     }

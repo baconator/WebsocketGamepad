@@ -1,0 +1,107 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.square-hack {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+div.gamepad {
+    width: 100%;
+    height: 100%;
+    
+    $buttonGroupSize: 5.25cm;
+    
+    .gamepad-buttons-4{
+        display: block;
+        /*position: relative;*/
+        position: absolute;
+        width: $buttonGroupSize;
+        max-width: 60%;
+        /*top: calc(70% - #{$buttonGroupSize} / 2);
+        left: calc(50% - #{$buttonGroupSize} / 4);*/
+        bottom: calc(#{$buttonGroupSize} / 4);
+        left: calc(50% - #{$buttonGroupSize} / 2)
+    }
+    
+    .gamepad-buttons-4::before{
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+    
+    .gamepad-buttons-4 .gamepad-button:nth-child(1){
+        margin-left: calc(100%/3);
+        margin-right: calc(100%/3);
+    }
+    
+    .gamepad-buttons-4 .gamepad-button:nth-child(3){
+        margin-left: calc(100%/3);
+    }
+    
+    .gamepad-buttons-4 .gamepad-button:nth-child(4){
+        margin-left: calc(100%/3);
+    }
+    
+    .gamepad-group > * {
+        width: 50%;
+        display: inline-block;
+    }
+    
+    .gamepad-button {
+        background-color: purple;
+        width: calc(100%/3);
+        height: calc(100%/3);
+        display: inline-block;
+        border-radius: 50% 50% 50% 50%;
+        /*display: inline-block;
+        width: calc(100%/3);
+        height: calc(100%/3);*/
+    }
+    
+    /* Analog stick */
+    $analogStickSize: 4/10;
+    .gamepad-stick {
+        background-color: green;
+        display: block;
+        border-radius: 50% 50% 50% 50%;
+        border: solid 0.1cm pink;
+        width: percentage($analogStickSize);
+        height: percentage($analogStickSize);
+        position: absolute;
+        visibility: hidden;
+    }
+    
+    .gamepad-touch-area {
+        display: inline-block;
+        width: 100%;
+        height: 50%;
+    }
+    
+    .gamepad-analog {
+        background-color: grey;
+        width: 3cm;
+        border-radius: 50% 50% 50% 50%;
+        border: solid 0.1cm black;
+        display: block;
+        position: relative;
+        visibility: hidden;
+    }
+    
+    .gamepad-analog::before{
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+}

@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        
+        <script type="application/ecmascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="application/ecmascript">
+            $(document).bind('touchmove', function(e) {
+                e.preventDefault();
+            });
+        </script>
+        <script type="application/ecmascript" src="bower_components/signalr/jquery.signalR.js"></script>
+        <script src="signalr/hubs"></script>
+        <script type="application/ecmascript" src="bower_components/underscore/underscore.js"></script>
+        <script type="application/ecmascript" src="bower_components/screenfull/dist/screenfull.js"></script>
+        <script type="application/ecmascript" src="res/js/touch.js"></script>
+        <script type="application/ecmascript" src="res/js/gamepad.js"></script>
+        
+        <script type="application/ecmascript">
+            $(document).ready(function(){
+                $("#launch-gamepad").bind("click", function(){
+                    if(screenfull.enabled){
+                        screenfull.request($(".gamepad").first()[0]);
+                    }
+                });
+            });
+        </script>
+        
+        <link type="text/css" rel="stylesheet" href="res/styles/gamepad.css"/>
+    </head>
+    <body>
+        <button id="launch-gamepad">Fullscreen</button>
+        <div class="gamepad">
+            <div class="gamepad-touch-area gamepad-left" id="left-analog">
+                <div class="gamepad-analog">
+                    <div class="gamepad-stick"></div>
+                </div>
+            </div><div class="gamepad-touch-area gamepad-right" id="right-buttons">
+                <ul class="gamepad-buttons-4">
+                    <div class="square-hack">
+                        <li class="gamepad-button"><span>A</span></li><li class="gamepad-button"><span>X</span></li><li class="gamepad-button"><span>B</span></li><li class="gamepad-button"><span>Y</span></li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
