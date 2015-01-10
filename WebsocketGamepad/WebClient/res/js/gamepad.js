@@ -251,16 +251,34 @@ $(document).ready(function(){
         }));
     };
     
+    $.connection.hub.logging = true;
     var hub = $.connection.phoneHub;
+
+    var userId = (function () {
+        var array = new Uint32Array(4);
+        window.crypto.getRandomValues(array);
+        var existing = $.cookie("userId");
+        if (!existing) {
+            $.cookie("userId", Array.prototype.join.call(array, ","));
+        }
+        return function () {
+            return $.cookie("userId");
+        };
+    }());
+
+    $.connection.phoneHub.client.dummyAction = function () {};
 
     $.connection.hub.start().done(function () {
         var gp = new Gamepad($(".gamepad").first());
         gp.listen("right-buttons", function (region, response) {
-            navigator.vibrate(percentApproximation(100));
-            hub.server.updateState(response.result.id + ":" + response.result.subId, response.result.type);
+            if (response.result.type != "move") {
+                navigator.vibrate(percentApproximation(100));
+                hub.server.updateState(userId(), response.result.id + ":" + response.result.subId, response.result.type);
+            }
         });
         gp.listen("left-analog", function (region, response) {
-            hub.server.updateState(response.result.id, JSON.stringify(response.result.value));
+            hub.server.updateState(userId(), response.result.id, JSON.stringify(response.result.value));
         })
     });
+
 });

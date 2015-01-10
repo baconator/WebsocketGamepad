@@ -102,6 +102,7 @@
     <Compile Include="Gamepad\Gamepad.Pool.cs" />
     <Compile Include="Gamepad\Gamepad.Wrapper.cs" />
     <Compile Include="PhoneHub.cs" />
+    <Compile Include="PhoneHub.Private.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />

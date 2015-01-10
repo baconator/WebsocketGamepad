@@ -26,6 +26,7 @@ namespace WebsocketGamepad
                 .Select(address => new UriBuilder("http", address.ToString(), 8000))
                 .First().ToString();
             var options = new StartOptions();
+            // TODO: listen on multiple addresses?
             options.Urls.Add(url);
             using (WebApp.Start(options, app => {
                 app.Use((context, next) =>{
@@ -35,6 +36,7 @@ namespace WebsocketGamepad
                     FileSystem = new PhysicalFileSystem(@"WebClient")
                 });
                 app.UseCors(CorsOptions.AllowAll);
+                GlobalHost.Configuration.KeepAlive = TimeSpan.FromSeconds(2);
                 app.MapSignalR();
             }))
             {
