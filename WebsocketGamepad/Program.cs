@@ -26,13 +26,15 @@ namespace WebsocketGamepad
         {
             //Work().Wait();
             //Demo(args);
-            var url = "http://192.168.1.129:8000";
-            using (WebApp.Start(url, app => {
+            var url = "http://207.23.195.31:8000";
+            var options = new StartOptions();
+            options.Urls.Add(url);
+            using (WebApp.Start(options, app => {
                 app.Use((context, next) =>{
                     return next();
                 });
                 app.UseStaticFiles(new StaticFileOptions() {
-                    FileSystem = new PhysicalFileSystem(@"C:\Users\Bacon\documents\visual studio 14\Projects\WebsocketGamepad\WebsocketGamepad\WebClient\")
+                    FileSystem = new PhysicalFileSystem(@"C:\Users\Bacon\Documents\WebsocketGamepad\WebsocketGamepad\WebClient\")
                 });
                 app.UseCors(CorsOptions.AllowAll);
                 app.MapSignalR();
