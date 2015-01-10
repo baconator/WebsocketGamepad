@@ -7,6 +7,8 @@ using Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using vJoyInterfaceWrap;
@@ -16,17 +18,13 @@ namespace WebsocketGamepad
 {
     class Program
     {
-        static async Task Work()
-        {
-            var gamepad = await Gamepad.Construct();
-            //await gamepad.ScrewAround();
-        }
-
         static void Main(string[] args)
         {
-            //Work().Wait();
-            //Demo(args);
-            var url = "http://207.23.195.31:8000";
+            var url = Dns
+                .GetHostAddresses(Dns.GetHostName())
+                .Where(address => address.AddressFamily == AddressFamily.InterNetwork) // Only use ipv4 for the time being.
+                .Select(address => new UriBuilder("http", address.ToString(), 8000))
+                .First().ToString();
             var options = new StartOptions();
             options.Urls.Add(url);
             using (WebApp.Start(options, app => {
@@ -34,7 +32,7 @@ namespace WebsocketGamepad
                     return next();
                 });
                 app.UseStaticFiles(new StaticFileOptions() {
-                    FileSystem = new PhysicalFileSystem(@"C:\Users\Bacon\Documents\WebsocketGamepad\WebsocketGamepad\WebClient\")
+                    FileSystem = new PhysicalFileSystem(@"WebClient")
                 });
                 app.UseCors(CorsOptions.AllowAll);
                 app.MapSignalR();

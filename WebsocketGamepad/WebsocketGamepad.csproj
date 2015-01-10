@@ -107,9 +107,14 @@
     <Compile Include="Server.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="WebClient\**\*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="WebClient\.bowerrc" />
+    <!--<None Include="WebClient\.bowerrc" />
     <None Include="WebClient\bower_components\jquery\.bower.json" />
     <None Include="WebClient\bower_components\jquery\bower.json" />
     <None Include="WebClient\bower_components\jquery\dist\jquery.min.map" />
@@ -129,13 +134,13 @@
     <None Include="WebClient\bower_components\underscore\README.md" />
     <None Include="WebClient\bower_components\underscore\underscore-min.map" />
     <None Include="WebClient\res\styles\gamepad.css.map" />
-    <None Include="WebClient\res\styles\gamepad.scss" />
+    <None Include="WebClient\res\styles\gamepad.scss" />-->
   </ItemGroup>
   <ItemGroup>
     <Content Include="vJoyInterface.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="WebClient\bower_components\jquery\dist\jquery.js" />
+    <!--<Content Include="WebClient\bower_components\jquery\dist\jquery.js" />
     <Content Include="WebClient\bower_components\jquery\dist\jquery.min.js" />
     <Content Include="WebClient\bower_components\jquery\MIT-LICENSE.txt" />
     <Content Include="WebClient\bower_components\jquery\src\ajax.js" />
@@ -230,7 +235,7 @@
     <Content Include="WebClient\gamepad.html" />
     <Content Include="WebClient\res\js\gamepad.js" />
     <Content Include="WebClient\res\js\touch.js" />
-    <Content Include="WebClient\res\styles\gamepad.css" />
+    <Content Include="WebClient\res\styles\gamepad.css" />-->
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
