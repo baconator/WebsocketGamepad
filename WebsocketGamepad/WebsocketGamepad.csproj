@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection.cs" />
     <Compile Include="Gamepad\Axis.cs" />
     <Compile Include="Gamepad\Axis.Dimension.cs" />
     <Compile Include="Gamepad\Buttons.cs" />

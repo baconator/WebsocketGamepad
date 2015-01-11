@@ -21,6 +21,8 @@ namespace WebsocketGamepad
         public async Task UpdateState(string userId, string id, string value) {
             try
             {
+                bool ignore;
+                if (BannedIps.TryGetValue(GetIpAddress(), out ignore)) throw new Exception(string.Format("Banned IP ({0})", GetIpAddress()));
                 var gamepadTask = GetUniqueGamepad(userId);
                 if (await Task.WhenAny(gamepadTask, Task.Delay(100)) != gamepadTask) throw new Exception("Timed out requesting a gamepad.");
                 var gamepad = await gamepadTask;
@@ -51,13 +53,20 @@ namespace WebsocketGamepad
 
         public override Task OnConnected()
         {
+            UpdateIpMap();
             return base.OnConnected();
         }
 
-        public override Task OnDisconnected(bool stopCalled)
+        public override Task OnReconnected()
         {
-            ReturnClientGamepad();
-            return base.OnDisconnected(stopCalled);
+            UpdateIpMap();
+            return base.OnReconnected();
+        }
+
+        public override async Task OnDisconnected(bool stopCalled)
+        {
+            await ReturnClientGamepad();
+            await base.OnDisconnected(stopCalled);
         }
     }
 }

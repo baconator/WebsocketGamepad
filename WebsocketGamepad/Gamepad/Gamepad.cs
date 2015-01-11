@@ -25,7 +25,7 @@ namespace VJoyWrapper
         public void Dispose()
         {
             // This probably causes obscure problems. Consider how to not do it later.
-            Pool.Release((int)Id);
+            Pool.Release((int)Id-1);
             Joystick.RelinquishVJD(Id);
         }
 

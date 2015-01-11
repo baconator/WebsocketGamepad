@@ -18,19 +18,54 @@ namespace WebsocketGamepad
         }
 
         protected static ConcurrentDictionary<string, Lazy<Task<Gamepad>>> Gamepads = new ConcurrentDictionary<string, Lazy<Task<Gamepad>>>();
-        protected static ConcurrentDictionary<string, string> ConnectionIdToClientMap = new ConcurrentDictionary<string, string>();
-        protected static SemaphoreSlim AvailableGamepads;
+        protected static ConcurrentDictionary<string, string> ConnectionIdToClientIdMap = new ConcurrentDictionary<string, string>();
+        protected static ConcurrentDictionary<string, string> ConnectionIdToIpMap = new ConcurrentDictionary<string, string>();
+        protected static ConcurrentDictionary<string, bool> BannedIps = new ConcurrentDictionary<string, bool>();
+        public static IEnumerable<Connection> Connections {
+            get {
+                return ConnectionIdToIpMap.Select(kvp =>
+                {
+                    var connectionId = kvp.Key;
+                    var address = kvp.Value;
+                    string userId;
+                    var active = ConnectionIdToClientIdMap.TryGetValue(connectionId, out userId) && Gamepads.ContainsKey(userId);
+                    return new Connection() { Address = address, Banned = BannedIps.ContainsKey(address), Active = active, UserId = userId };
+                }).Distinct();
+            }
+        }
+        public static void Ban(string ip) {
+            BannedIps.AddOrUpdate(ip, true, (a, b) => true);
+        }
+        public static void Unban(string ip) {
+            bool ignored;
+            BannedIps.TryRemove(ip, out ignored);
+        }
+
+        private string GetIpAddress() {
+            object address;
+            if (Context.Request.Environment.TryGetValue("server.RemoteIpAddress", out address)) return (string)address;
+            return null;
+        }
+
+        private void UpdateIpMap() {
+            ConnectionIdToIpMap.AddOrUpdate(Context.ConnectionId, GetIpAddress(), (a, b) => GetIpAddress());
+        }
 
         private Task<Gamepad> GetUniqueGamepad(string id)
         {
-            ConnectionIdToClientMap.AddOrUpdate(Context.ConnectionId, id, (a, b) => id);
-            return Gamepads.GetOrAdd(id, new Lazy<Task<Gamepad>>(Gamepad.Construct, LazyThreadSafetyMode.ExecutionAndPublication)).Value;
+            UpdateIpMap();
+            ConnectionIdToClientIdMap.AddOrUpdate(Context.ConnectionId, id, (a, b) => id);
+            return Gamepads.GetOrAdd(id, new Lazy<Task<Gamepad>>(async ()=> {
+                var output = await Gamepad.Construct();
+                Clients.Caller.updateGamepadNumber(output.Id);
+                return output;
+            }, LazyThreadSafetyMode.ExecutionAndPublication)).Value;
         }
 
         private async Task ReturnClientGamepad() {
             string userId;
             Lazy<Task<Gamepad>> gamepadWrapper;
-            if (ConnectionIdToClientMap.TryGetValue(Context.ConnectionId, out userId) && Gamepads.TryRemove(userId, out gamepadWrapper)) {
+            if (ConnectionIdToClientIdMap.TryGetValue(Context.ConnectionId, out userId) && Gamepads.TryRemove(userId, out gamepadWrapper)) {
                 var gamepad = await gamepadWrapper.Value;
                 gamepad.Dispose();
             }

@@ -23,6 +23,14 @@ div.gamepad {
     
     $buttonGroupSize: 5.25cm;
     
+    /** {
+        z-index: 9000;
+    }
+    
+    .gamepad-status {
+        z-index: 8999;
+    }*/
+    
     .gamepad-buttons-4{
         display: block;
         /*position: relative;*/
@@ -73,10 +81,10 @@ div.gamepad {
     /* Analog stick */
     $analogStickSize: 4/10;
     .gamepad-stick {
-        background-color: green;
+        background-color: transparent;
         display: block;
         border-radius: 50% 50% 50% 50%;
-        border: solid 0.1cm pink;
+        border: solid 0.1cm #25b2e0;
         width: percentage($analogStickSize);
         height: percentage($analogStickSize);
         position: absolute;
@@ -90,10 +98,10 @@ div.gamepad {
     }
     
     .gamepad-analog {
-        background-color: grey;
+        background-color: transparent;
         width: 3cm;
         border-radius: 50% 50% 50% 50%;
-        border: solid 0.1cm black;
+        border: solid 0.1cm #25b2e0;
         display: block;
         position: relative;
         visibility: hidden;

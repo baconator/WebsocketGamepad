@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using vJoyInterfaceWrap;
 using VJoyWrapper;
@@ -41,7 +42,24 @@ namespace WebsocketGamepad
             }))
             {
                 Console.WriteLine("Server running on {0}", url);
-                Console.ReadLine();
+                while (true) {
+                    Console.Write(">> ");
+                    var input = Console.ReadLine();
+                    var commands = input.Split(' ');
+                    switch (commands[0]) {
+                        case "list":
+                            foreach(var connection in PhoneHub.Connections) {
+                                Console.WriteLine(connection.ToString());
+                            }
+                            break;
+                        case "ban":
+                            PhoneHub.Ban(commands[1]);
+                            break;
+                        case "unban":
+                            PhoneHub.Unban(commands[1]);
+                            break;
+                    }
+                }
             }
         }
     }

@@ -201,6 +201,7 @@ $(document).ready(function(){
         };
         
         this.element.bind("touchstart", function(ev){
+            //if($(ev.currentTarget).parents(".gamepad-touch-area").length === 0) return;
             ev.preventDefault();
             // For each finger, set up a mapping to correlate regions.
             var fingers = ev.originalEvent.changedTouches;
@@ -266,7 +267,9 @@ $(document).ready(function(){
         };
     }());
 
-    $.connection.phoneHub.client.dummyAction = function () {};
+    $.connection.phoneHub.client.updateGamepadNumber = function (num) {
+        alert(num);
+    };
 
     $.connection.hub.start().done(function () {
         var gp = new Gamepad($(".gamepad").first());
