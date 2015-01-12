@@ -18,7 +18,7 @@
         
         <script type="application/ecmascript">
             $(document).ready(function(){
-                $("#launch-gamepad").bind("click", function(){
+                $(document).bind("click", function(){
                     if(screenfull.enabled){
                         screenfull.request($(".gamepad").first()[0]);
                     }
@@ -31,18 +31,23 @@
     <body>
         <button id="launch-gamepad">Fullscreen</button>
         <div class="gamepad">
-            <!--<div class="gamepad-status"><span>Disconnected</span></div>-->
-            <div class="gamepad-touch-area gamepad-left" id="left-analog">
-                <div class="gamepad-analog">
-                    <div class="gamepad-stick"></div>
-                </div>
-            </div><div class="gamepad-touch-area gamepad-right" id="right-buttons">
-                <ul class="gamepad-buttons-4">
-                    <div class="square-hack">
-                        <li class="gamepad-button"><span>A</span></li><li class="gamepad-button"><span>X</span></li><li class="gamepad-button"><span>B</span></li><li class="gamepad-button"><span>Y</span></li>
+            <div class="gamepad-control-area">
+                <div class="gamepad-touch-area gamepad-left" id="left-analog">
+                    <div class="gamepad-analog">
+                        <div class="gamepad-stick"></div>
                     </div>
-                </ul>
+                </div><div class="gamepad-touch-area gamepad-right" id="right-buttons">
+                    <ul class="gamepad-buttons-4">
+                        <div class="square-hack">
+                            <li class="gamepad-button"><span>A</span></li><li class="gamepad-button"><span>X</span></li><li class="gamepad-button"><span>B</span></li><li class="gamepad-button"><span>Y</span></li>
+                        </div>
+                    </ul>
+                    <ul class="gamepad-controls">
+                        <li class="gamepad-control" style="float: left;" name="4">Back</li><li class="gamepad-control" style="float: right;" name="5">Start</li>
+                    </ul>
+                </div>
             </div>
+            <div class="gamepad-status"><span>Disconnected</span></div>
         </div>
     </body>
 </html>

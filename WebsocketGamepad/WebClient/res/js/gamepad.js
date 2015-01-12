@@ -58,7 +58,7 @@ $(document).ready(function(){
         getName: {
             value: function(el){
                 var target = $(el);
-                if(target.hasClass("gamepad-button")){
+                if(target.hasClass("gamepad-button") || target.hasClass("gamepad-control")){
                     var name = target.attr("name");
                     name = name || target.index();
                     return name;
@@ -252,7 +252,6 @@ $(document).ready(function(){
         }));
     };
     
-    $.connection.hub.logging = true;
     var hub = $.connection.phoneHub;
 
     var userId = (function () {
@@ -268,14 +267,14 @@ $(document).ready(function(){
     }());
 
     $.connection.phoneHub.client.updateGamepadNumber = function (num) {
-        alert(num);
+        $(".gamepad-status span").text("Gamepad #" + num);
     };
 
     $.connection.hub.start().done(function () {
         var gp = new Gamepad($(".gamepad").first());
         gp.listen("right-buttons", function (region, response) {
             if (response.result.type != "move") {
-                navigator.vibrate(percentApproximation(100));
+                //navigator.vibrate(percentApproximation(100));
                 hub.server.updateState(userId(), response.result.id + ":" + response.result.subId, response.result.type);
             }
         });
